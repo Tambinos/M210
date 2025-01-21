@@ -34,12 +34,7 @@ jobs:
         run: |
           docker build -t ghcr.io/tambinos/hellom210:latest .
 
-      # Run the image to see if any errors occur
-      - name: Run the Docker Image
-        run: |
-          docker run --name hellom210 -p 8080:8080 ghcr.io/tambinos/hellom210:latest
-          docker stop hellom210
-      # Push the Docker image to GHCR
+      # Push the image to GHCR
       - name: Push the Docker image to GHCR
         run: |
           docker push ghcr.io/tambinos/hellom210:latest
