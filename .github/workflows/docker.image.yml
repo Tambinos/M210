@@ -1,6 +1,4 @@
-# .github/workflows/docker-image.yml
-
-name: Build and Push Docker Image
+name: Build, Test, and Push Docker Image
 
 on:
   push:
@@ -11,7 +9,7 @@ on:
       - main  # Trigger on pull request to main
 
 jobs:
-  build:
+  build-test-and-push:
     runs-on: ubuntu-latest
     
     steps:
@@ -31,6 +29,12 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.TOKEN }}
 
+      # Run tests before building the Docker image
+      - name: Run tests
+        run: |
+          # Replace with your actual testing command
+          npm test
+
       # Build the Docker image
       - name: Build the Docker image
         run: |
@@ -40,3 +44,4 @@ jobs:
       - name: Push the Docker image to GHCR
         run: |
           docker push ghcr.io/tambinos/hellom210:latest
+
